@@ -11,75 +11,90 @@ const Greeting = () =>{
     //     <p>world hello</p>
     // </div>
     <>
-    {/* <h1 className="h1-color">Hello world</h1>
-    <p style={{margin:"20px"}}>world hello</p>
-    <img src="logo192.png" />
-    <button className="btn btn-success">Buy</button> */}
 
-    <br></br>
-    <h1 className="h1-color">Food list</h1>
+      <br></br>
+      <h1 className="h1-color">Food list</h1>
 
-    <div className="container mt-3">
-      <div className="row">
-        <div className="col-4">
-          <Product title="Grilled Salmon"
-          desc="10% discount"
-          price="28000 ks" 
-          img="food1.png"/>
-        </div>
-        <div className="col-4">
-          <Product title="Vege-lover meal"
-          desc="10% discount"
-          price="7800 ks" 
-          img="food2.png"/>
-        </div>
-        <div className="col-4">
-          <Product title="Burger"
-          desc="10% discount"
-          price="8000 ks"
-          img="food3.png"/>
-        </div>
-        <div className="col-4">
-          <Product title="something"
-          desc="10% discount"
-          price="20000 ks"
-          img="food4.png"/>
+      <div className="container mt-3">
+        <div className="row">
+
+          <div className="col-4">
+            <Product title="Grilled Salmon"
+            desc="10% discount"
+            price="28000 ks" 
+            img="food1.png"/>
+          </div>
+
+          <div className="col-4">
+            <Product title="Vege-lover meal"
+            desc="10% discount"
+            price="7800 ks" 
+            img="food2.png"/>
+          </div>
+
+          <div className="col-4">
+            <Product title="Burger"
+            desc="10% discount"
+            price="8000 ks"
+            img="food3.png"/>
+          </div>
+
+          <div className="col-4">
+            <Product title="something"
+            desc="10% discount"
+            price="20000 ks"
+            img="food4.png"/>
+          </div>
         </div>
       </div>
-    </div>
-
-    {/* <Product2/>
-    <Product3/> */}
 
     </>
   )
-}
+};
 
 const Product = (props)=> {
   return (
     <>
     <div className="card">
       <center>
-      <img src={props.img} onDoubleClick={title==="Burger" ? imgMouse3: undefined}
+      <img src={props.img} 
       className="mt-3" 
       style={{borderRadius:"20px"}}
       width="200px" 
-      height="auto" /><br></br>
+      height="auto" 
 
-      <h1 className="" onMouseOut={imgMouse2}>
+      // onDoubleClick={props.img=="food3.png" ? imgMouse3 : undefined }
+      
+      onDoubleClick={ props.img=="food3.png" ? ()=>RedBtn(props.img) : undefined }
+      // onDoubleClick={ props.img=="food3.png" ? ()=>document.getElementById(props.img).style.backgroundColor = 'red' : undefined }
+
+      // onDoubleClick={props.img=="food3.png" ? (imgMouse3, ()=>RedBtn(props.img)) : undefined }
+
+      /><br></br>
+
+      <h1 className="" 
+      onMouseOver={imgMouse}
+      >
         {props.title}
       </h1>
 
-      <p style={{margin:"20px"}} onMouseOver={imgMouse} >
+      <p style={{margin:"20px"}} 
+      onMouseOut={imgMouse2}
+      >
         description : {props.desc}
       </p>
 
-      <p style={{margin:"20px"}}>
+      <p style={{margin:"20px"}}
+      onDoubleClick={props.img=="food3.png" ? imgMouse3 : undefined}
+      >
         price : {props.price}
       </p>
 
-      <button className="btn btn-success" 
-      onClick={()=>buyClick(props.title,props.price) }>
+      <button className="btn btn-success"
+      style={{marginBottom:"5px"}}
+      id={props.img}
+      onClick={()=>buyClick(props.title, props.price) }
+      >
         Buy
       </button>
       </center>
@@ -87,56 +102,31 @@ const Product = (props)=> {
     </>
 
   )
-}
+};
 
-const buyClick = (title,price)=> {
-  if (title=="Beef burger") {
+const buyClick = (title,price) => {
+  if (title=="Burger") {
     alert("you bought "+ title +". Price is free");
   } else {
     alert("you bought "+ title +". Price is "+ price);
   }
+};
+
+const imgMouse = () => {
+  alert("Mouse over on h1 tag !!!");
+};
+
+const imgMouse2 = () => {
+  alert("Mouse out from p tag-description !!!");
+};
+
+const imgMouse3 = () => {
+  alert("Mouse double clicked on p tag-price of Burger !!!");
+};
+
+const RedBtn = (id) => {
+  document.getElementById(id).style.backgroundColor = 'red';
 }
-
-const imgMouse = ()=> {
-  alert("Mouse over");
-}
-
-const imgMouse2 = ()=> {
-  alert("Mouse out");
-}
-
-const imgMouse3 = ()=> {
-  alert("Mouse double clicked");
-}
-
-
-// const Product2 = ()=> {
-//   return (
-//     <>
-//       <div className="card">
-//         <h1 className="">Food2</h1>
-//         <img src="food2.png" className="product-images" />
-//         <p style={{margin:"20px"}}>this is food2.</p>
-//         <button className="btn btn-success">Buy</button>
-//       </div>
-//     </>
-
-//   )
-// }
-
-// const Product3 = ()=> {
-//   return (
-//     <>
-//     <div className="card">
-//       <h1 className="">Food3</h1>
-//       <img src="food3.png" className="product-images" />
-//       <p style={{margin:"20px"}}>this is food3.</p>
-//       <button className="btn btn-success">Buy</button>
-//     </div>
-//     </>
-
-//   )
-// }
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(<Greeting/>);

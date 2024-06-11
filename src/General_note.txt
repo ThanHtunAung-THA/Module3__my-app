@@ -1,0 +1,26 @@
+
+onMouseOver={imgMouse}
+
+onMouseOut={imgMouse2}
+
+onDoubleClick={title==="Burger" ? imgMouse3: undefined}
+
+onDoubleClick={ props.img=="food3.png" ? ()=>RedBtn(props.img) : undefined }
+
+
+
+const imgMouse = () => {
+  alert("Mouse over on h1 tag !!!");
+};
+
+const imgMouse2 = () => {
+  alert("Mouse out from p tag-description !!!");
+};
+
+const imgMouse3 = () => {
+  alert("Mouse double clicked on p tag-price of Burger !!!");
+};
+
+const RedBtn = (id) => {
+  document.getElementById(id).style.backgroundColor = 'red';
+}
